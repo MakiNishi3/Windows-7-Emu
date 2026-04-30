@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Guacamole Client</title>
+<script src="guacamole-common-js/all.min.js"></script>
+<style>
+html,body,#display{width:100%;height:100%;margin:0;padding:0;background:#000}
+</style>
+</head>
+<body>
+<div id="display"></div>
+<script>
+var tunnel=new Guacamole.WebSocketTunnel("ws://localhost:8080/guacamole/websocket-tunnel");
+var client=new Guacamole.Client(tunnel);
+document.getElementById("display").appendChild(client.getDisplay().getElement());
+client.connect("token=validtoken");
+window.onunload=function(){client.disconnect();}
+</script>
+</body>
+</html>
